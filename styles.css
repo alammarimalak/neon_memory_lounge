@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500&family=Exo+2:wght@300;400&display=swap');
-        
+    
         body {
             font-family: 'Exo 2', sans-serif;
             background-color: #0a0b16;
@@ -126,7 +126,7 @@
         
         #restart-button {
             padding: 10px 25px;
-            background: rgba(18, 22, 40, 0.9); /* Solid background instead of blur */
+            background: rgba(18, 22, 40, 0.9);
             color: #ff9af9;
             border: 1px solid rgba(220, 100, 255, 0.4);
             border-radius: 4px;
@@ -171,7 +171,6 @@
             100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
         }
 
-        /* Base styles remain the same until the media queries */
 
         @media (max-width: 768px) {
             body {
@@ -196,7 +195,7 @@
             .card {
                 width: 100%;
                 height: 0;
-                padding-bottom: 100%; /* Maintain square aspect ratio */
+                padding-bottom: 100%;
                 position: relative;
                 max-width: 80px;
                 max-height: 80px;
