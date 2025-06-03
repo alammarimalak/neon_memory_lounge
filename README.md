@@ -31,18 +31,4 @@ A modern, responsive memory matching card game with sleek animations and sound e
 
 No installation required! Simply open `index.html` in your browser.
 
-Or deploy to GitHub Pages:
-
-1. Fork this repository
-2. Go to Settings > Pages
-3. Select main branch and save
-
-## Customization
-
-To modify the game:
-
-- Change card values in `script.js` (cardValues array)
-- Adjust colors in `style.css`
-- Replace background music in the audio tag
-
 **Enjoy the game!** 
