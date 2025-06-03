@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500&family=Exo+2:wght@300;400&display=swap');
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: #0a0b16;
+            color: #b3e0ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 70% 30%, rgba(100, 220, 255, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 30% 70%, rgba(220, 100, 255, 0.08) 0%, transparent 25%);
+            overflow-x: hidden;
+        }
+        
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            color: #80e1ff;
+            text-shadow: 0 0 8px rgba(128, 225, 255, 0.4);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 300;
+            color: #c8a2ff;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        #game-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            width: 420px;
+            margin: 20px auto;
+            perspective: 1000px;
+        }
+        
+        .card {
+            width: 95px;
+            height: 95px;
+            background: rgba(18, 22, 40, 0.9); /* More opaque to compensate for missing blur */
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            font-family: 'Rajdhani', sans-serif;
+            color: transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 
+                0 2px 10px rgba(0, 0, 0, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(100, 220, 255, 0.15);
+            /* Removed backdrop-filter */
+        }
+        
+        .card::before {
+            content: "❖";
+            position: absolute;
+            color: rgba(100, 220, 255, 0.5);
+            font-size: 32px;
+            transition: all 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            border-color: rgba(100, 220, 255, 0.3);
+        }
+        
+        .card:hover::before {
+            color: rgba(100, 220, 255, 0.7);
+        }
+        
+        .card.flipped {
+            background: rgba(25, 30, 60, 0.9); /* More opaque */
+            color: #ff9af9;
+            text-shadow: 0 0 8px rgba(255, 154, 249, 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(220, 100, 255, 0.3);
+            box-shadow: 
+                0 4px 20px rgba(220, 100, 255, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.15);
+        }
+        
+        .card.flipped::before {
+            content: none;
+        }
+        
+        .card.matched {
+            background: rgba(40, 60, 80, 0.9); /* More opaque */
+            color: #80ffd4;
+            text-shadow: 0 0 12px rgba(128, 255, 212, 0.4);
+            cursor: default;
+            border-color: rgba(100, 255, 200, 0.4);
+            box-shadow: 
+                0 4px 25px rgba(100, 255, 200, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+        
+        #score-display {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #b3e0ff;
+            margin: 25px 0;
+            letter-spacing: 1px;
+        }
+        
+        #restart-button {
+            padding: 10px 25px;
+            background: rgba(18, 22, 40, 0.9); /* Solid background instead of blur */
+            color: #ff9af9;
+            border: 1px solid rgba(220, 100, 255, 0.4);
+            border-radius: 4px;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            /* Removed backdrop-filter */
+            margin-top: 10px;
+        }
+        
+        #restart-button:hover {
+            background: rgba(25, 30, 60, 0.9);
+            border-color: rgba(220, 100, 255, 0.6);
+            text-shadow: 0 0 8px rgba(255, 154, 249, 0.4);
+            box-shadow: 0 0 15px rgba(220, 100, 255, 0.2);
+        }
+        
+        /* Ambient floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(100, 220, 255, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                text-align: center;
+                font-size: 1.8rem;
+                margin-bottom: 0;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 20px;
+            }
+            
+            #game-container {
+                gap: 8px;
+                max-width: 340px;
+            }
+            
+            .card {
+                font-size: 22px;
+            }
+            
+            .card::before {
+                font-size: 28px;
+            }
+            
+            #score-display {
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+            
+            #restart-button {
+                padding: 8px 20px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                text-align: center;
+                font-size: 1.6rem;
+            }
+            
+            #game-container {
+                max-width: 300px;
+                gap: 6px;
+            }
+            
+            .card {
+                font-size: 20px;
+            }
+            
+            .card::before {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+                min-height: auto;
+            }
+            
+            h1 {
+                text-align:center;
+                font-size: 1.5rem;
+                margin-bottom: 0;
+            }
+            
+            .subtitle {
+                text-align: center;
+                margin-bottom: 10px;
+                font-size: 0.7rem;
+            }
+            
+            #game-container {
+                max-width: 80vh;
+                margin: 10px auto;
+            }
+            
+            #score-display {
+                margin: 10px 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                text-align: center;
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                text-align: center;
+                font-size: 1rem;
+            }
+            
+            #game-container {
+                max-width: 500px;
+                gap: 15px;
+            }
+            
+            .card {
+                font-size: 30px;
+            }
+            
+            .card::before {
+                font-size: 36px;
+            }
+            
+            #restart-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion) {
+            .card {
+                transition: none;
+            }
+            
+            .particle {
+                animation: none;
+                display: none;
+            }
+        }
