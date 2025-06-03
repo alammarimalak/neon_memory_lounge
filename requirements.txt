@@ -1,0 +1,3 @@
+- add infinite levels
+- add score
+- add sound effects

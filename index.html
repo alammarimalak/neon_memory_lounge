@@ -4,23 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Memory Lounge</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500&family=Exo+2:wght@300;400&display=swap">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="particles" id="particles"></div>
     
     <h1>NEON MEMORY LOUNGE</h1>
-    <div class="subtitle">MATCHING GAME</div>
+    <div class="subtitle">PROGRESSIVE MATCHING CHALLENGE</div>
     
-    <div id="score-display">MATCHES: <span id="score">0</span>/8</div>
+    <div class="game-info">
+        <div>LEVEL: <span id="level-display">1</span></div>
+        <div>TIME: <span id="timer">60</span>s</div>
+        <div>SCORE: <span id="score">0</span></div>
+    </div>
+    
     <div id="game-container"></div>
+    
     <button id="restart-button">NEW SEQUENCE</button>
     
     <audio id="background-music" loop>
         <source src="Sonic Frontiers - Cyber Space 1-2 Flowing.mp3" type="audio/mpeg">
     </audio>
+    <audio id="flip-sound">
+        <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="match-sound">
+        <source src="https://www.soundjay.com/buttons/sounds/button-21.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="win-sound">
+        <source src="https://www.soundjay.com/buttons/sounds/button-20.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div id="win-modal" class="modal">
+        <div class="modal-content">
+            <h2>LEVEL COMPLETE!</h2>
+            <p>Time: <span class="highlight" id="completion-time">0</span> seconds</p>
+            <p>Score: +<span class="highlight" id="level-score">100</span></p>
+            <div class="button-container">
+                <button class="modal-button" id="restart-level-btn">REPLAY</button>
+                <button class="modal-button" id="next-level-btn">CONTINUE</button>
+            </div>
+        </div>
+    </div>
 
-    <script src="game.js">      
-    </script>
+    <script src="game.js"></script>     
 </body>
 </html>

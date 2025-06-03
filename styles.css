@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500&family=Exo+2:wght@300;400&display=swap');
-    
+        
         body {
             font-family: 'Exo 2', sans-serif;
             background-color: #0a0b16;
@@ -37,19 +37,32 @@
             text-transform: uppercase;
         }
         
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 420px;
+            margin-bottom: 15px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .game-info span {
+            color: #80ffd4;
+            margin-left: 5px;
+        }
+        
         #game-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             width: 420px;
-            margin: 20px auto;
+            margin: 10px auto;
             perspective: 1000px;
         }
         
         .card {
             width: 95px;
             height: 95px;
-            background: rgba(18, 22, 40, 0.9); /* More opaque to compensate for missing blur */
+            background: rgba(18, 22, 40, 0.9);
             border-radius: 6px;
             display: flex;
             justify-content: center;
@@ -65,7 +78,6 @@
             position: relative;
             transform-style: preserve-3d;
             border: 1px solid rgba(100, 220, 255, 0.15);
-            /* Removed backdrop-filter */
         }
         
         .card::before {
@@ -89,7 +101,7 @@
         }
         
         .card.flipped {
-            background: rgba(25, 30, 60, 0.9); /* More opaque */
+            background: rgba(25, 30, 60, 0.9);
             color: #ff9af9;
             text-shadow: 0 0 8px rgba(255, 154, 249, 0.3);
             transform: translateY(-3px);
@@ -104,7 +116,7 @@
         }
         
         .card.matched {
-            background: rgba(40, 60, 80, 0.9); /* More opaque */
+            background: rgba(40, 60, 80, 0.9);
             color: #80ffd4;
             text-shadow: 0 0 12px rgba(128, 255, 212, 0.4);
             cursor: default;
@@ -114,14 +126,6 @@
                 inset 0 1px 1px rgba(255, 255, 255, 0.2);
             transform: scale(0.95);
             opacity: 0.9;
-        }
-        
-        #score-display {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: #b3e0ff;
-            margin: 25px 0;
-            letter-spacing: 1px;
         }
         
         #restart-button {
@@ -135,8 +139,7 @@
             cursor: pointer;
             transition: all 0.4s ease;
             letter-spacing: 1px;
-            /* Removed backdrop-filter */
-            margin-top: 10px;
+            margin-top: 20px;
         }
         
         #restart-button:hover {
@@ -144,6 +147,73 @@
             border-color: rgba(220, 100, 255, 0.6);
             text-shadow: 0 0 8px rgba(255, 154, 249, 0.4);
             box-shadow: 0 0 15px rgba(220, 100, 255, 0.2);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: rgba(18, 22, 40, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 80%;
+            box-shadow: 0 0 30px rgba(128, 225, 255, 0.3);
+            border: 1px solid rgba(100, 220, 255, 0.3);
+        }
+        
+        .modal h2 {
+            color: #80ffd4;
+            font-family: 'Rajdhani', sans-serif;
+            margin-top: 0;
+            text-shadow: 0 0 10px rgba(128, 255, 212, 0.3);
+        }
+        
+        .modal p {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            color: #b3e0ff;
+        }
+        
+        .modal .highlight {
+            color: #ff9af9;
+            font-weight: 400;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .modal-button {
+            padding: 10px 20px;
+            background: rgba(25, 30, 60, 0.9);
+            color: #b3e0ff;
+            border: 1px solid rgba(100, 220, 255, 0.4);
+            border-radius: 4px;
+            font-family: 'Exo 2', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-button:hover {
+            background: rgba(40, 45, 80, 0.9);
+            color: #80e1ff;
+            border-color: rgba(100, 220, 255, 0.6);
         }
         
         /* Ambient floating particles */
@@ -171,25 +241,15 @@
             100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
         }
 
-
+        /* Responsive styles */
         @media (max-width: 768px) {
             body {
                 padding: 15px;
-                text-align: center;
             }
 
-            h1, .subtitle {
-                text-align: center;
-            }
-
-            #game-container {
+            .game-info, #game-container {
                 width: 100%;
                 max-width: 400px;
-                margin: 20px auto;
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
-                justify-content: center;
             }
 
             .card {
@@ -217,12 +277,10 @@
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.8rem;
-                margin-bottom: 5px;
             }
 
             .subtitle {
                 font-size: 0.8rem;
-                margin-bottom: 15px;
             }
 
             #game-container {
@@ -238,40 +296,5 @@
 
             .card::before {
                 font-size: 26px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            #game-container {
-                max-width: 300px;
-                gap: 5px;
-            }
-
-            .card {
-                max-width: 70px;
-                max-height: 70px;
-                font-size: 20px;
-            }
-
-            .card::before {
-                font-size: 24px;
-            }
-        }
-
-        /* For landscape orientation on mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding: 5px;
-                min-height: auto;
-            }
-
-            #game-container {
-                max-width: 90vh;
-                margin: 10px auto;
-            }
-
-            .card {
-                max-width: 20vh;
-                max-height: 20vh;
             }
         }
