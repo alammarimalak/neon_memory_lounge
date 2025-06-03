@@ -1,4 +1,4 @@
-# Memory Card Game
+# Memory Card Game 🎴
 
 A modern, progressive memory matching game with increasing difficulty levels, timed challenges, and a scoring system - all wrapped in a sleek cyberpunk/neon aesthetic.
 
