@@ -171,127 +171,108 @@
             100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
         }
 
+        /* Base styles remain the same until the media queries */
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                text-align: center;
+            }
+
+            h1, .subtitle {
+                text-align: center;
+            }
+
+            #game-container {
+                width: 100%;
+                max-width: 400px;
+                margin: 20px auto;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .card {
+                width: 100%;
+                height: 0;
+                padding-bottom: 100%; /* Maintain square aspect ratio */
+                position: relative;
+                max-width: 80px;
+                max-height: 80px;
+            }
+
+            .card::before,
+            .card .card-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
         @media (max-width: 480px) {
             h1 {
-                text-align: center;
                 font-size: 1.8rem;
-                margin-bottom: 0;
+                margin-bottom: 5px;
             }
-            
+
             .subtitle {
                 font-size: 0.8rem;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
-            
+
             #game-container {
-                gap: 8px;
-                max-width: 340px;
+                gap: 6px;
+                max-width: 320px;
             }
-            
+
             .card {
+                max-width: 75px;
+                max-height: 75px;
                 font-size: 22px;
             }
-            
+
             .card::before {
-                font-size: 28px;
-            }
-            
-            #score-display {
-                font-size: 1rem;
-                margin: 15px 0;
-            }
-            
-            #restart-button {
-                padding: 8px 20px;
-                font-size: 0.8rem;
+                font-size: 26px;
             }
         }
 
         @media (max-width: 360px) {
-            h1 {
-                text-align: center;
-                font-size: 1.6rem;
-            }
-            
             #game-container {
                 max-width: 300px;
-                gap: 6px;
+                gap: 5px;
             }
-            
+
             .card {
+                max-width: 70px;
+                max-height: 70px;
                 font-size: 20px;
             }
-            
+
             .card::before {
                 font-size: 24px;
             }
         }
 
+        /* For landscape orientation on mobile */
         @media (max-height: 500px) and (orientation: landscape) {
             body {
-                padding: 10px;
+                padding: 5px;
                 min-height: auto;
             }
-            
-            h1 {
-                text-align:center;
-                font-size: 1.5rem;
-                margin-bottom: 0;
-            }
-            
-            .subtitle {
-                text-align: center;
-                margin-bottom: 10px;
-                font-size: 0.7rem;
-            }
-            
+
             #game-container {
-                max-width: 80vh;
+                max-width: 90vh;
                 margin: 10px auto;
             }
-            
-            #score-display {
-                margin: 10px 0;
-            }
-        }
 
-        @media (min-width: 768px) {
-            h1 {
-                text-align: center;
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                text-align: center;
-                font-size: 1rem;
-            }
-            
-            #game-container {
-                max-width: 500px;
-                gap: 15px;
-            }
-            
             .card {
-                font-size: 30px;
-            }
-            
-            .card::before {
-                font-size: 36px;
-            }
-            
-            #restart-button {
-                padding: 12px 30px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (prefers-reduced-motion) {
-            .card {
-                transition: none;
-            }
-            
-            .particle {
-                animation: none;
-                display: none;
+                max-width: 20vh;
+                max-height: 20vh;
             }
         }

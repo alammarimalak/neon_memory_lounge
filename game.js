@@ -122,6 +122,7 @@ function createParticles() {
                     }, 1000);
                 }
             }
+
             
             restartButton.addEventListener('click', initGame);
             
